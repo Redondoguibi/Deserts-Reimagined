@@ -9,6 +9,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.slf4j.Logger;
 import com.redondoguibi.desertsreimagined.dimension.CthirisStructureLoader;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.level.LevelEvent;
 
 @Mod(DesertsReimagined.MODID)
@@ -25,12 +26,10 @@ public class DesertsReimagined {
         ModEffects.MOB_EFFECTS.register(modEventBus);
         ModAttachments.ATTACHMENT_TYPES.register(modEventBus);
         ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);
-        ModDimensions.DIMENSION_TYPES.register(modEventBus);
-        ModLevelStems.LEVEL_STEMS.register(modEventBus);
 
 
         modEventBus.addListener(this::commonSetup);
-        modEventBus.addListener(this::onLevelLoad);
+        NeoForge.EVENT_BUS.addListener(this::onLevelLoad);
 
         LOGGER.info("DesertsReimagined inicializated.");
     }

@@ -1,15 +1,18 @@
 package com.redondoguibi.desertsreimagined.item;
 
 import com.redondoguibi.desertsreimagined.dimension.DimensionPositionMemory;
+import com.redondoguibi.desertsreimagined.dimension.ModDimensions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.portal.DimensionTransition;
+import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -46,44 +49,69 @@ public class EssenceOfCurseItem extends Item implements GeoItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (!level.isClientSide()) {
-            // Verifica se está no bioma de deserto
-            boolean isDesert = level.getBiome(player.blockPosition()).is(BiomeTags.IS_DESERT);
-            if (!isDesert) {
-                return InteractionResultHolder.fail(stack);
-            }
 
-            // Verifica cooldown
-            if (player.getCooldowns().isOnCooldown(this)) {
-                return InteractionResultHolder.fail(stack);
-            }
-
-            ServerLevel serverLevel = (ServerLevel) level;
-            boolean inCthiris = serverLevel.dimension().equals(com.redondoguibi.desertsreimagined.dimension.ModDimensions.CTHIRIS_DIMENSION_TYPE.getKey());
-
-            if (inCthiris) {
-                DimensionPositionMemory.saveDesertPosition(player, player.blockPosition());
-                ServerLevel overworld = serverLevel.getServer().getLevel(net.minecraft.world.level.Level.OVERWORLD);
-                if (overworld != null) {
-                    BlockPos returnPos = DimensionPositionMemory.getDesertPosition(player);
-                    player.changeDimension(overworld, (server, entity, portalDir) -> {
-                        entity.teleportTo(overworld, returnPos.getX(), returnPos.getY(), returnPos.getZ(), entity.getYRot(), entity.getXRot());
-                    });
-                    stack.shrink(1);
-                    return InteractionResultHolder.success(stack);
-                }
-            } else {
-                DimensionPositionMemory.saveDesertPosition(player, player.blockPosition());
-                ServerLevel cthiris = serverLevel.getServer().getLevel(com.redondoguibi.desertsreimagined.dimension.ModDimensions.CTHIRIS_DIMENSION_TYPE.getKey());
-                if (cthiris != null) {
-                    player.changeDimension(cthiris, (server, entity, portalDir) -> {
-                        entity.teleportTo(cthiris, 18, 12, 3, entity.getYRot(), entity.getXRot());
-                    });
-                    player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
-                    return InteractionResultHolder.success(stack);
-                }
-            }
+        if (level.isClientSide()) {
+            return InteractionResultHolder.pass(stack);
         }
-        return InteractionResultHolder.pass(stack);
+
+        ServerLevel serverLevel = (ServerLevel) level;
+        boolean inCthiris = serverLevel.dimension().equals(ModDimensions.CTHIRIS_LEVEL);
+
+        // Dentro de C'Thiris, o item sempre pode devolver o jogador ao ponto salvo.
+        if (inCthiris) {
+            ServerLevel overworld = serverLevel.getServer().getLevel(Level.OVERWORLD);
+            if (overworld == null) {
+                return InteractionResultHolder.fail(stack);
+            }
+
+            BlockPos returnPos = DimensionPositionMemory.getDesertPosition(player);
+            Vec3 destination = new Vec3(
+                    returnPos.getX() + 0.5D,
+                    returnPos.getY(),
+                    returnPos.getZ() + 0.5D
+            );
+
+            player.changeDimension(new DimensionTransition(
+                    overworld,
+                    destination,
+                    Vec3.ZERO,
+                    player.getYRot(),
+                    player.getXRot(),
+                    DimensionTransition.DO_NOTHING
+            ));
+
+            stack.shrink(1);
+            return InteractionResultHolder.success(stack);
+        }
+
+        // Entrada em C'Thiris só é permitida a partir do deserto vanilla.
+        boolean isDesert = level.getBiome(player.blockPosition()).is(Biomes.DESERT);
+        if (!isDesert) {
+            return InteractionResultHolder.fail(stack);
+        }
+
+        if (player.getCooldowns().isOnCooldown(this)) {
+            return InteractionResultHolder.fail(stack);
+        }
+
+        DimensionPositionMemory.saveDesertPosition(player, player.blockPosition());
+
+        ServerLevel cthiris = serverLevel.getServer().getLevel(ModDimensions.CTHIRIS_LEVEL);
+        if (cthiris == null) {
+            return InteractionResultHolder.fail(stack);
+        }
+
+        Vec3 destination = new Vec3(18.5D, 12.0D, 3.5D);
+        player.changeDimension(new DimensionTransition(
+                cthiris,
+                destination,
+                Vec3.ZERO,
+                player.getYRot(),
+                player.getXRot(),
+                DimensionTransition.DO_NOTHING
+        ));
+
+        player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
+        return InteractionResultHolder.success(stack);
     }
 }

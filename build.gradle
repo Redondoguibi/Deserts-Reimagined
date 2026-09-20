@@ -5,12 +5,11 @@ plugins {
 }
 
 tasks.named('wrapper', Wrapper).configure {
-    // Define wrapper values here so as to not have to always do so when updating gradlew.properties.
-    // Switching this to Wrapper.DistributionType.ALL will download the full gradle sources that comes with
-    // documentation attached on cursor hover of gradle classes and methods. However, this comes with increased
-    // file size for Gradle. If you do switch this to ALL, run the Gradle wrapper task twice afterwards.
-    // (Verify by checking gradle/wrapper/gradle-wrapper.properties to see if distributionUrl now points to `-all`)
-    distributionType = Wrapper.DistributionType.BIN
+    // NeoGradle 7.1.x is validated against the Gradle 8.x line.
+    // Pin the wrapper so IDE syncs and wrapper regeneration cannot silently move this
+    // Minecraft 1.21.1 workspace onto an incompatible Gradle 9.x release.
+    gradleVersion = '8.14'
+    distributionType = Wrapper.DistributionType.ALL
 }
 
 version = mod_version

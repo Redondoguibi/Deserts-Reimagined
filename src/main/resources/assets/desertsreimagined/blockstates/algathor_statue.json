@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "desertsreimagined:block/algathor_statue" },
+    "facing=east":  { "model": "desertsreimagined:block/algathor_statue", "y": 90 },
+    "facing=south": { "model": "desertsreimagined:block/algathor_statue", "y": 180 },
+    "facing=west":  { "model": "desertsreimagined:block/algathor_statue", "y": 270 }
+  }
+}

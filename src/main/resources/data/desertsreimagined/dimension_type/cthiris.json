@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:dimension_type",
+  "value": {
+    "fixed_time": 18000,
+    "has_skylight": false,
+    "has_ceiling": true,
+    "ultrawarm": false,
+    "coordinate_scale": 1.0,
+    "bed_works": true,
+    "respawn_anchor_works": false,
+    "min_y": 0,
+    "height": 384,
+    "logical_height": 384,
+    "infiniburn": "desertsreimagined:cthiris_block",
+    "effects_location": "desertsreimagined:cthiris",
+    "ambient_light": 0.0
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "desertsreimagined:item/algathor_statue"
+  }
+}

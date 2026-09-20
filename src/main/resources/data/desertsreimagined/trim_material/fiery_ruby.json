@@ -1,0 +1,9 @@
+{
+  "asset_name": "fiery_ruby",
+  "ingredient": "desertsreimagined:fiery_ruby",
+  "item_model_index": 0.15,
+  "description": {
+    "translate": "trim_material.desertsreimagined.fiery_ruby",
+    "color": "#d51706"
+  }
+}

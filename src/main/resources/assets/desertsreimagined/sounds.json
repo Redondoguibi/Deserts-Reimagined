@@ -1,0 +1,33 @@
+{
+  "cthiris_god.hurt": {
+    "subtitle": "Cthiris God hurts",
+    "sounds": [
+      {
+        "name": "desertsreimagined:cthiris_god_hurt",
+        "preload": true,
+        "stream": false
+      }
+    ]
+  },
+
+  "cthiris_god.death": {
+    "subtitle": "Cthiris God dies",
+    "sounds": [
+      {
+        "name": "desertsreimagined:cthiris_god_death",
+        "preload": true,
+        "stream": false
+      }
+    ]
+  },
+
+  "cthiris_god.bossfight": {
+    "subtitle": "Cthiris God boss theme",
+    "sounds": [
+      {
+        "name": "desertsreimagined:cthiris_god_bossfight",
+        "stream": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "sources": [
+    {
+      "type": "paletted_permutations",
+      "textures": [
+        "trims/entity/humanoid/coast",
+        "trims/entity/humanoid/sentry",
+        "trims/entity/humanoid/dune",
+        "trims/entity/humanoid/wild",
+        "trims/entity/humanoid/ward",
+        "trims/entity/humanoid/eye",
+        "trims/entity/humanoid/vex",
+        "trims/entity/humanoid/tide",
+        "trims/entity/humanoid/snout",
+        "trims/entity/humanoid/rib",
+        "trims/entity/humanoid/spire",
+        "trims/entity/humanoid/wayfinder",
+        "trims/entity/humanoid/shaper",
+        "trims/entity/humanoid/silence",
+        "trims/entity/humanoid/raiser",
+        "trims/entity/humanoid/host",
+        "trims/entity/humanoid/flow",
+        "trims/entity/humanoid/bolt",
+        "trims/entity/humanoid_leggings/coast_leggings",
+        "trims/entity/humanoid_leggings/sentry_leggings",
+        "trims/entity/humanoid_leggings/dune_leggings",
+        "trims/entity/humanoid_leggings/wild_leggings",
+        "trims/entity/humanoid_leggings/ward_leggings",
+        "trims/entity/humanoid_leggings/eye_leggings",
+        "trims/entity/humanoid_leggings/vex_leggings",
+        "trims/entity/humanoid_leggings/tide_leggings",
+        "trims/entity/humanoid_leggings/snout_leggings",
+        "trims/entity/humanoid_leggings/rib_leggings",
+        "trims/entity/humanoid_leggings/spire_leggings",
+        "trims/entity/humanoid_leggings/wayfinder_leggings",
+        "trims/entity/humanoid_leggings/shaper_leggings",
+        "trims/entity/humanoid_leggings/silence_leggings",
+        "trims/entity/humanoid_leggings/raiser_leggings",
+        "trims/entity/humanoid_leggings/host_leggings",
+        "trims/entity/humanoid_leggings/flow_leggings",
+        "trims/entity/humanoid_leggings/bolt_leggings"
+      ],
+      "palette_key": "minecraft:trims/color_palettes/trim_palette",
+      "permutations": {
+        "quartz": "minecraft:trims/color_palettes/quartz",
+        "iron": "minecraft:trims/color_palettes/iron",
+        "gold": "minecraft:trims/color_palettes/gold",
+        "diamond": "minecraft:trims/color_palettes/diamond",
+        "netherite": "minecraft:trims/color_palettes/netherite",
+        "redstone": "minecraft:trims/color_palettes/redstone",
+        "copper": "minecraft:trims/color_palettes/copper",
+        "emerald": "minecraft:trims/color_palettes/emerald",
+        "lapis": "minecraft:trims/color_palettes/lapis",
+        "amethyst": "minecraft:trims/color_palettes/amethyst",
+        "iron_darker": "minecraft:trims/color_palettes/iron_darker",
+        "gold_darker": "minecraft:trims/color_palettes/gold_darker",
+        "diamond_darker": "minecraft:trims/color_palettes/diamond_darker",
+        "netherite_darker": "minecraft:trims/color_palettes/netherite_darker",
+        "fiery_ruby": "desertsreimagined:trims/color_palettes/fiery_ruby"
+      }
+    }
+  ]
+}
